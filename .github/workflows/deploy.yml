@@ -17,6 +17,11 @@ jobs:
         uses: webfactory/ssh-agent@v0.5.3
         with:
           ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+      
+      - name: Setup Nodejs
+        uses: actions/setup-node@v3
+        with:
+            node-version: '16'
 
       - name: Deploy Debian12
         run: |
