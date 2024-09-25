@@ -11,7 +11,7 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       - name: Set up SSH
         uses: webfactory/ssh-agent@v0.5.3
@@ -29,9 +29,7 @@ jobs:
 
             # Clone the repository (this will replace existing files in the directory)
             git clone https://github.com/malimikillua/node-test.git . || git pull origin main
-
-            # If you have dependencies to install, uncomment and modify the following lines:
-            # npm install  # For Node.js applications
+             npm install  # For Node.js applications
             # pip install -r requirements.txt  # For Python applications
 
             # Restart the application or service (modify according to your setup)
@@ -39,5 +37,5 @@ jobs:
             # pm2 restart your-app  # If using PM2 for Node.js
 
             # Optional: Clear cache, build assets, etc. depending on your setup
-            # npm run build
+             npm run dev
           EOF
