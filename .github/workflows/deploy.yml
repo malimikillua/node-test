@@ -1,9 +1,9 @@
-name: Deploy Javascript Program
+name: Deploy JavaScript Program
 
 on:
   push:
     branches:
-      - main  # Trigger on pushes to the main branch
+      - main # Trigger on pushes to the main branch
 
 jobs:
   deploy:
@@ -13,28 +13,32 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: "16" # Specify your Node.js version
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run tests
+        run: npm test
+
       - name: Set up SSH
         uses: webfactory/ssh-agent@v0.5.3
         with:
           ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
 
-          
-      - name: Deploy Debian12
-        run: |
-          ssh -o StrictHostKeyChecking=no ict@102.221.238.122 << 'EOF'
-            
-           
+      - name: Add server to known hosts
+        run: ssh-keyscan -H 102.221.238.122 >> ~/.ssh/known_hosts
 
-            # Navigate to the application directory
+      - name: Deploy to Debian 12
+        run: |
+          ssh ict@102.221.238.122 << 'EOF'
+            set -e
             cd /home/ict/ci-cd || exit 1
             git pull origin main
-             npm install  # For Node.js applications
-            # pip install -r requirements.txt  # For Python applications
-
-            # Restart the application or service (modify according to your setup)
-            # systemctl restart your-service  # If using systemd
-            # pm2 restart your-app  # If using PM2 for Node.js
-
-            # Optional: Clear cache, build assets, etc. depending on your setup
-             npm run dev
+            npm ci
+            npm run build  # If you have a build step
+            pm2 restart your-app-name  # Use PM2 to manage your Node.js app
           EOF
