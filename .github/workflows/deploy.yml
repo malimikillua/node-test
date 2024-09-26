@@ -39,6 +39,4 @@ jobs:
             cd /home/ict/ci-cd || exit 1
             git pull origin main
             npm ci
-            npm run build  # If you have a build step
-            pm2 restart your-app-name  # Use PM2 to manage your Node.js app
           EOF
