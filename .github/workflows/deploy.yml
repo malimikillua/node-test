@@ -37,7 +37,7 @@ jobs:
           
       - name: Deploy Debian12
         run: |
-          ssh -o StrictHostKeyChecking=no ict@102.221.238.122 << 'EOF'git
+          ssh -o StrictHostKeyChecking=no ict@102.221.238.122 << 'EOF'
             # Navigate to the application directory
             cd /home/ict/ci-cd || exit 1
             git pull origin main
