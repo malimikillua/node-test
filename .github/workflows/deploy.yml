@@ -52,5 +52,6 @@ jobs:
             # pm2 restart your-app  # If using PM2 for Node.js
 
             # Optional: Clear cache, build assets, etc. depending on your setup
+            npm run build
             npm run start
           EOF
