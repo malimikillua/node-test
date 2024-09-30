@@ -46,7 +46,7 @@ jobs:
             
             npm install  # For Node.js applications
             # pip install -r requirements.txt  # For Python applications
-              git clone https://github.com/malimikillua/node-test
+              git clone https://github.com/malimikillua/node-test . || (cd . && git pull)
             # Restart the application or service (modify according to your setup)
             # systemctl restart your-service  # If using systemd
             # pm2 restart your-app  # If using PM2 for Node.js
