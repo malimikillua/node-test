@@ -47,11 +47,12 @@ jobs:
             git pull origin main
             npm install  # For Node.js applications
             # pip install -r requirements.txt  # For Python applications
-
+              git pull origin main
             # Restart the application or service (modify according to your setup)
             # systemctl restart your-service  # If using systemd
             # pm2 restart your-app  # If using PM2 for Node.js
 
             # Optional: Clear cache, build assets, etc. depending on your setup
+            npm run build
             npm run start
           EOF
